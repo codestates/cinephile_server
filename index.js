@@ -12,17 +12,17 @@ const moviesRouter = require("./routes/movies")
 const usersRouter = require("./routes/users")
 
 // https options
-// const option =
-//   process.env.NODE_ENV === "production"
-//     ? {
-//       key: fs.readFileSync(__dirname + ""),
-//       cert: fs.readFileSync(__dirname + "")
-//     }
-//     : undefined
+const option =
+  process.env.NODE_ENV === "production"
+    ? {
+      key: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/privkey.pem"),
+      chain: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/fullchain.pem")
+    }
+    : undefined
 
 // server
 const app = express()
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 3000
 
 // middleware
 app.use(
@@ -48,11 +48,11 @@ app.use("/movies", moviesRouter)
 app.use("/users", usersRouter)
 
 // http, https
-// option ?
-//   https.createServer(option, app).listen(PORT, () => {
-//     console.log(`Server is running at port ${PORT}`)
-//   })
-//   :
-app.listen(PORT, () => {
-  console.log(`Server is running at port ${PORT}`)
-})
+option ?
+  https.createServer(option, app).listen(PORT, () => {
+    console.log(`HTTPS is running at port ${PORT}`)
+  })
+  :
+  app.listen(PORT, () => {
+    console.log(`HTTP is running at port ${PORT}`)
+  })
