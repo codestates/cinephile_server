@@ -1,4 +1,7 @@
 'use strict';
+
+const crypto = require('crypto');
+
 const {
   Model
 } = require('sequelize');
@@ -11,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.comment)
     }
   };
   user.init({
@@ -18,8 +22,24 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    sex: DataTypes.STRING
+    sex: DataTypes.STRING,
   }, {
+    hooks: {
+      // 가입할 때
+      beforeCreate: (data, options) => {
+        var shasum = crypto.createHmac('sha1', 'secret');
+        shasum.update(data.password);
+        data.password = shasum.digest('hex');
+      },
+      // 로그인할 때
+      beforeFind: (data, options) => {
+        if (data.where.password) {
+          var shasum = crypto.createHmac('sha1', 'secret');
+          shasum.update(data.where.password);
+          data.where.password = shasum.digest('hex')
+        }
+      }
+    },
     sequelize,
     modelName: 'user',
   });

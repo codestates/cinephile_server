@@ -1,3 +1,3 @@
 module.exports = {
-  movielists: require('./movielists')
+  movies: require('./movies')
 }

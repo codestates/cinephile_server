@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
-router.get("/", (res, req) => {
-  console.log("//////////////")
+router.get("/", (req, res) => {
+  res.send('everthing is ok')
 })
 
 module.exports = router
