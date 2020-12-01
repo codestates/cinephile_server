@@ -1,5 +1,4 @@
-const { user } = require('../../models')
-const crypto = require('crypto')
+const { user, comment } = require('../../models')
 
 module.exports = async (req, res) => {
   const { email, password } = req.body
@@ -10,6 +9,11 @@ module.exports = async (req, res) => {
         email: email,
         password: password
       }
+      // association
+      // include: [{
+      //   model: comment,
+      //   required: true
+      // }]
     })
     .then(user => {
       // 로그인 성공

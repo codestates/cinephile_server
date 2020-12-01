@@ -5,21 +5,29 @@ const morgan = require("morgan")
 const session = require("express-session")
 const cors = require("cors")
 
+require("dotenv").config()
+
 const indexRouter = require("./routes/index")
 const moviesRouter = require("./routes/movies")
 const usersRouter = require("./routes/users")
 
 // https options
-//
+// const option =
+//   process.env.NODE_ENV === "production"
+//     ? {
+//       key: fs.readFileSync(__dirname + ""),
+//       cert: fs.readFileSync(__dirname + "")
+//     }
+//     : undefined
 
 // server
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 80
 
 // middleware
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: true,
     methods: ['GET', 'POST'],
     credentials: true
   }))
@@ -40,7 +48,11 @@ app.use("/movies", moviesRouter)
 app.use("/users", usersRouter)
 
 // http, https
-const httpsServer = https.createServer(app)
-app.listen(port, () => {
-  console.log(`server listening on ${port}`)
+// option ?
+//   https.createServer(option, app).listen(PORT, () => {
+//     console.log(`Server is running at port ${PORT}`)
+//   })
+//   :
+app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`)
 })
