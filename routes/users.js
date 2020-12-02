@@ -1,10 +1,15 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/users")
+const usersController = require("../controllers/users")
+const oauthController = require("../controllers/oauth")
 
-router.post("/signup", controller.signup)
-router.post("/login", controller.login)
-router.post("/logout", controller.logout)
-router.post("/userinfo", controller.userinfo)
+// default
+router.post("/signup", usersController.signup)
+router.post("/login", usersController.login)
+router.post("/logout", usersController.logout)
+router.post("/userinfo", usersController.userinfo)
+
+// OAuth
+router.post("/kakao", oauthController.kakao)
 
 module.exports = router

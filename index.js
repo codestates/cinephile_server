@@ -16,7 +16,7 @@ const option =
   process.env.NODE_ENV === "production"
     ? {
       key: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/privkey.pem"),
-      chain: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/fullchain.pem")
+      cert: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/fullchain.pem")
     }
     : undefined
 
