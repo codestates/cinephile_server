@@ -1,4 +1,4 @@
-const { user, comment } = require('../../models')
+const { user } = require('../../models')
 
 module.exports = async (req, res) => {
   const { email, password } = req.body
@@ -8,12 +8,7 @@ module.exports = async (req, res) => {
       where: {
         email: email,
         password: password
-      },
-      // association
-      include: [{
-        model: comment,
-        required: true
-      }]
+      }
     })
     .then(user => {
       // 로그인 성공
