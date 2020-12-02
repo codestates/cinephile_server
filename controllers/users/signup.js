@@ -1,7 +1,6 @@
 const { user } = require('../../models')
 
 module.exports = async (req, res) => {
-  console.log(req.body)
   const { email, password, nickname, sex, age } = req.body
   if (email && password && nickname && sex && age) {
     await user
@@ -27,9 +26,7 @@ module.exports = async (req, res) => {
           res.status(409).send('Already exists user')
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => { console.log(err) })
   }
   else {
     // 파라미터가 하나라도 불충분하면

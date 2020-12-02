@@ -27,19 +27,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       // 가입할 때
-      beforeCreate: (data, options) => {
-        var shasum = crypto.createHmac('sha1', 'secret');
-        shasum.update(data.password);
-        data.password = shasum.digest('hex');
-      },
+      // beforeCreate: (data, options) => {
+      //   var shasum = crypto.createHmac('sha1', 'secret');
+      //   shasum.update(data.password);
+      //   data.password = shasum.digest('hex');
+      // },
       // 로그인할 때
-      beforeFind: (data, options) => {
-        if (data.where.password) {
-          var shasum = crypto.createHmac('sha1', 'secret');
-          shasum.update(data.where.password);
-          data.where.password = shasum.digest('hex')
-        }
-      }
+      // beforeFind: (data, options) => {
+      //   if (data.where.password) {
+      //     var shasum = crypto.createHmac('sha1', 'secret');
+      //     shasum.update(data.where.password);
+      //     data.where.password = shasum.digest('hex')
+      //   }
+      // }
     },
     sequelize,
     modelName: 'user',
