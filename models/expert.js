@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.expert.belongsToMany(models.movie, { through: 'expert_movie' })
+      // 외래키를 like(source) 모델이 가지고 있다. 그래서 belongsTo
+      models.expert.belongsTo(models.movie)
     }
   };
   expert.init({
     estimate: DataTypes.STRING,
-    expert_name: DataTypes.STRING,
+    movieId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'expert',
