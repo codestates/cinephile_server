@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.user.hasMany(models.comment)
+      // 외래키를 comment(target) 모델이 가지고 있다. 그래서 hasOne
+      models.user.hasOne(models.comment)
     }
   };
   user.init({

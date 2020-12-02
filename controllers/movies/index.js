@@ -1,3 +1,5 @@
 module.exports = {
-  movies: require('./movies')
+  movies: require('./movies'),
+  comment: require('./comment'),
+  like: require('./like')
 }

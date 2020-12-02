@@ -37,15 +37,21 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
   session({
     secret: '@final',
+    name: 'cookie',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      // sameSite: 'none', // only secure
+      // secure: true // HTTPS
+    }
   })
 )
 
 // router
 app.use("/", indexRouter)
-app.use("/movies", moviesRouter)
 app.use("/users", usersRouter)
+app.use("/movies", moviesRouter)
 
 // http, https
 option ?

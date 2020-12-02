@@ -11,16 +11,22 @@ module.exports = {
       estimate: {
         type: Sequelize.STRING
       },
-      expert_name: {
-        type: Sequelize.STRING
+      movieId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'movies',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

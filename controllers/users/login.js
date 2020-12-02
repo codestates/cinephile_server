@@ -8,19 +8,18 @@ module.exports = async (req, res) => {
       where: {
         email: email,
         password: password
-      }
+      },
       // association
-      // include: [{
-      //   model: comment,
-      //   required: true
-      // }]
+      include: [{
+        model: comment,
+        required: true
+      }]
     })
     .then(user => {
       // 로그인 성공
       if (user) {
         req.session.userid = user.id
-        // 쿠키 전달
-        res.set({ 'Set-Cookie': `session_id=${user.id}` })
+        user.password = ''
         res.status(200).send(user)
       }
       // 로그인 실패

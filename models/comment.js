@@ -11,13 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.comment.belongsTo(models.user)
+      // 외래키를 like(source) 모델이 가지고 있다. 그래서 belongsTo
+      models.comment.belongsTo(models.movie)
+
     }
   };
   comment.init({
     usercomment: DataTypes.STRING,
     star: DataTypes.INTEGER,
     like: DataTypes.INTEGER,
+    movieId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
     sequelize,
