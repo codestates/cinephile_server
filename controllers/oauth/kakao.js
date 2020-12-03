@@ -43,12 +43,10 @@ module.exports = {
       })
       .then((user, created) => {
         if (created) {
-          console.log(ACCESS_TOKEN)
           res.cookie('token', ACCESS_TOKEN)
           res.status(200).send(user)
         }
         else {
-          console.log(ACCESS_TOKEN)
           res.cookie('token', ACCESS_TOKEN)
           res.status(200).send(user)
         }
@@ -57,7 +55,6 @@ module.exports = {
   },
 
   unlink: async (req, res) => {
-    console.log(req.cookies)
     axios({
       method: 'post',
       url: 'https://kapi.kakao.com/v1/user/unlink',

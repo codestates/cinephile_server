@@ -1,15 +1,21 @@
+const crypto = require('crypto')
 const { user } = require('../../models')
 
 module.exports = async (req, res) => {
   const { email, password, nickname, sex, age } = req.body
   if (email && password && nickname && sex && age) {
+    // 암호화
+    const hashPassword =
+      crypto.createHmac('sha1', 'secret').update(password).digest('hex')
+
+    // 모델 조작
     await user
       // 가입 체크
       .findOrCreate({
         where: { email: email },
         defaults: {
           email: email,
-          password: password,
+          password: hashPassword,
           nickname: nickname,
           sex: sex,
           age: age

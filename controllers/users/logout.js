@@ -1,7 +1,8 @@
 module.exports = (req, res) => {
   // 세션 파괴
+  console.log(req.session)
   req.session.destroy(() => {
-    // res.clearCookie('session_id', { path: '/' })
+    console.log(req.session)
     res.status(205).send('Logged out successfully')
   })
 }

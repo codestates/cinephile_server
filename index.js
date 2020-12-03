@@ -39,13 +39,13 @@ app.use(cookieParser())
 app.use(
   session({
     secret: '@final',
-    name: 'cookie',
+    key: 'cookie',
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      // sameSite: 'none', // only secure
-      // secure: true // HTTPS
+      sameSite: 'none', // only secure
+      secure: true // HTTPS
     }
   })
 )
