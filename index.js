@@ -2,6 +2,7 @@ const express = require("express")
 const fs = require("fs")
 const https = require("https")
 const morgan = require("morgan")
+const cookieParser = require('cookie-parser')
 const session = require("express-session")
 const cors = require("cors")
 
@@ -34,16 +35,17 @@ app.use(
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 app.use(
   session({
     secret: '@final',
-    name: 'cookie',
+    key: 'cookie',
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      // sameSite: 'none', // only secure
-      // secure: true // HTTPS
+      sameSite: 'none', // only secure
+      secure: true // HTTPS
     }
   })
 )

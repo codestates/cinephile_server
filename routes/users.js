@@ -10,6 +10,7 @@ router.post("/logout", usersController.logout)
 router.post("/userinfo", usersController.userinfo)
 
 // OAuth
-router.post("/kakao", oauthController.kakao)
+router.get("/kakao", oauthController.kakao.link)
+router.get("/kakao/unlink", oauthController.kakao.unlink)
 
 module.exports = router

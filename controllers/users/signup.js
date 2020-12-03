@@ -1,16 +1,21 @@
+const crypto = require('crypto')
 const { user } = require('../../models')
 
 module.exports = async (req, res) => {
-  console.log(req.body)
   const { email, password, nickname, sex, age } = req.body
   if (email && password && nickname && sex && age) {
+    // 암호화
+    const hashPassword =
+      crypto.createHmac('sha1', 'secret').update(password).digest('hex')
+
+    // 모델 조작
     await user
       // 가입 체크
       .findOrCreate({
         where: { email: email },
         defaults: {
           email: email,
-          password: password,
+          password: hashPassword,
           nickname: nickname,
           sex: sex,
           age: age
@@ -27,9 +32,7 @@ module.exports = async (req, res) => {
           res.status(409).send('Already exists user')
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => { console.log(err) })
   }
   else {
     // 파라미터가 하나라도 불충분하면

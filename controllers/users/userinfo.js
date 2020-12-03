@@ -1,11 +1,10 @@
 const { user } = require('../../models')
-const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   // 쿠키 확인
-  // console.log(req.session, req.session.id, req.session.cookie)
+  console.log(req.cookies, req.session, req.sessionID)
   let id = req.session.userid
-  if (id) {
+  if (req.session.sessionID === req.sessionID) {
     user.findOne({
       where: {
         id: id
