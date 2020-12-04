@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   // 쿠키 확인
   console.log(req.cookies, req.session, req.sessionID)
   let id = req.session.userid
-  if (req.session.sessionID === req.sessionID) {
+  if (req.cookies.token) {
     user.findOne({
       where: {
         id: id

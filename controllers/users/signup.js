@@ -2,8 +2,8 @@ const crypto = require('crypto')
 const { user } = require('../../models')
 
 module.exports = async (req, res) => {
-  const { email, password, nickname, sex, age } = req.body
-  if (email && password && nickname && sex && age) {
+  const { email, password, nickname, gender, age } = req.body
+  if (email && password && nickname && gender && age) {
     // 암호화
     const hashPassword =
       crypto.createHmac('sha1', 'secret').update(password).digest('hex')
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
           email: email,
           password: hashPassword,
           nickname: nickname,
-          sex: sex,
+          gender: gender,
           age: age
         }
       })

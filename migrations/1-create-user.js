@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      oauth_id: {
+        type: Sequelize.STRING
+      },
       nickname: {
         type: Sequelize.STRING
       },
@@ -20,7 +23,7 @@ module.exports = {
       age: {
         type: Sequelize.INTEGER
       },
-      sex: {
+      gender: {
         type: Sequelize.STRING
       },
       createdAt: {
