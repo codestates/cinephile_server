@@ -2,8 +2,9 @@ const { user } = require('../../models')
 const axios = require('axios')
 
 require("dotenv").config()
-const REST_API_KEY = process.env.REST_API_KEY // REST_API_KEY
-const REDIRECT_URI_KA = process.env.REDIRECT_URI_KA // REDIRECT_URI_KA
+const APP_ID = process.env.APP_ID // APP_ID
+const SECRET_CODE = process.env.SECRET_CODE // SECRET_CODE
+const REDIRECT_URI_FA = process.env.REDIRECT_URI_FA // REDIRECT_URI_FA
 
 module.exports = {
   link: async (req, res) => {
@@ -12,10 +13,9 @@ module.exports = {
 
     // 토큰을 요청한다.
     const token = await axios({
-      method: 'post',
-      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI_KA}&code=${code}`,
+      method: 'get',
+      url: `https://graph.facebook.com/v9.0/oauth/access_token?client_id=${APP_ID}&redirect_uri=${REDIRECT_URI_FA}&client_secret=${SECRET_CODE}&code=${code}`,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
 
@@ -25,16 +25,15 @@ module.exports = {
     // 토큰으로 유저정보를 요청한다.
     const userinfo = await axios({
       method: 'get',
-      url: `https://kapi.kakao.com/v2/user/me`,
+      url: `https://graph.facebook.com/me`,
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        Authorization: `Bearer ${ACCESS_TOKEN}`
       }
     })
 
     // 로그인 & 회원가입
     const id = userinfo.data.id
-    const nickname = userinfo.data.properties.nickname
+    const nickname = userinfo.data.name
     await user
       .findOrCreate({
         where: { oauth_id: id },
@@ -44,6 +43,7 @@ module.exports = {
         }
       })
       .then((user, created) => {
+        console.log(user[0])
         if (created) {
           res.cookie('token', ACCESS_TOKEN)
           res.status(200).send(user[0].oauth_id)
@@ -57,23 +57,7 @@ module.exports = {
   },
 
   unlink: async (req, res) => {
-    axios({
-      method: 'post',
-      url: 'https://kapi.kakao.com/v1/user/unlink',
-      headers: {
-        Authorization: `Bearer ${req.cookies.token}`
-      }
-    })
-      .then(result => {
-        res.status(200).send(`id: ${result.data.id} unlink success`)
-      })
-      .catch(err => {
-        console.log(err)
-        res.status(401).send('this access token does not exist')
-      })
+    res.status(200).redirect('http://localhost:3001')
+
   }
 }
-
-
-
-

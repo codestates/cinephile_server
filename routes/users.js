@@ -13,4 +13,10 @@ router.post("/userinfo", usersController.userinfo)
 router.get("/kakao", oauthController.kakao.link)
 router.get("/kakao/unlink", oauthController.kakao.unlink)
 
+router.get("/naver", oauthController.naver.link)
+router.get("/naver/unlink", oauthController.naver.unlink)
+
+router.get("/facebook", oauthController.facebook.link)
+router.get("/facebook/unlink", oauthController.facebook.unlink)
+
 module.exports = router

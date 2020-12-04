@@ -19,11 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   user.init({
+    oauth_id: DataTypes.INTEGER,
     nickname: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    sex: DataTypes.STRING,
+    gender: DataTypes.STRING
   }, {
     hooks: {
       // 가입할 때

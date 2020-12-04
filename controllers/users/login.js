@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
       // 로그인 성공
       if (user) {
         req.session.userid = user.id
-        req.session.sessionID = req.sessionID
         user.password = ''
         res.status(200).send(user)
       }
