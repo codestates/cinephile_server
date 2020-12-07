@@ -14,12 +14,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // 외래키를 comment(target) 모델이 가지고 있다. 그래서 hasOne
-      models.user.hasOne(models.comment)
     }
   };
   user.init({
-    oauth_id: DataTypes.INTEGER,
+    oauth_id: DataTypes.STRING,
     nickname: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
