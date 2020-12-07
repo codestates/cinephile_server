@@ -11,34 +11,37 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      actor: {
-        type: Sequelize.STRING
-      },
-      runtime: {
-        type: Sequelize.STRING
-      },
-      story: {
-        type: Sequelize.STRING
-      },
-      description: {
+      sub_title: {
         type: Sequelize.STRING
       },
       genre: {
         type: Sequelize.STRING
       },
-      release_date: {
+      nation: {
         type: Sequelize.STRING
       },
-      rating: {
+      runtime: {
+        type: Sequelize.STRING
+      },
+      pubdate: {
         type: Sequelize.STRING
       },
       director: {
         type: Sequelize.STRING
       },
+      actor: {
+        type: Sequelize.STRING
+      },
+      rating: {
+        type: Sequelize.STRING
+      },
       poster: {
         type: Sequelize.STRING
       },
-      thumnail: {
+      story1: {
+        type: Sequelize.STRING
+      },
+      story2: {
         type: Sequelize.STRING
       },
       createdAt: {

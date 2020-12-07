@@ -11,22 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.movie.hasMany(models.comment)
-      models.movie.hasMany(models.expert)
     }
   };
   movie.init({
     title: DataTypes.STRING,
-    actor: DataTypes.STRING,
-    runtime: DataTypes.STRING,
-    story: DataTypes.STRING,
-    description: DataTypes.STRING,
+    sub_title: DataTypes.STRING,
     genre: DataTypes.STRING,
-    release_date: DataTypes.STRING,
-    rating: DataTypes.STRING,
+    nation: DataTypes.STRING,
+    runtime: DataTypes.STRING,
+    pubdate: DataTypes.STRING,
     director: DataTypes.STRING,
+    actor: DataTypes.STRING,
+    rating: DataTypes.STRING,
     poster: DataTypes.STRING,
-    thumnail: DataTypes.STRING
+    story1: DataTypes.STRING,
+    story2: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'movie',

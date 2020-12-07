@@ -9,7 +9,7 @@ const cors = require("cors")
 require("dotenv").config()
 
 const indexRouter = require("./routes/index")
-const moviesRouter = require("./routes/movies")
+const boardRouter = require("./routes/board")
 const usersRouter = require("./routes/users")
 
 // https options
@@ -53,7 +53,7 @@ app.use(
 // router
 app.use("/", indexRouter)
 app.use("/users", usersRouter)
-app.use("/movies", moviesRouter)
+app.use("/board", boardRouter)
 
 // http, https
 option ?
