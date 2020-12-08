@@ -1,6 +1,6 @@
 'use strict';
 
-const crypto = require('crypto');
+const crypto = require('crypto')
 
 const {
   Model
@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      user.hasMany(models.comment)
+      user.hasMany(models.article)
+      user.hasMany(models.like)
     }
   };
   user.init({

@@ -1,6 +1,8 @@
 module.exports = {
   board: require('./board'),
   movies: require('./movies'),
+  article: require('./article'),
   write: require('./write'),
-  article: require('./article')
+  comment: require('./comment'),
+  like: require('./like')
 }

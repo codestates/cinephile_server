@@ -14,11 +14,19 @@ module.exports = {
       text: {
         type: Sequelize.STRING
       },
-      users_id: {
-        type: Sequelize.INTEGER
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        }
       },
-      movies_id: {
-        type: Sequelize.INTEGER
+      movieId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'movies',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

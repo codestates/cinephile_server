@@ -50,7 +50,7 @@ module.exports = {
       .then((user, created) => {
         if (created) {
           res.cookie('token', ACCESS_TOKEN)
-          res.status(200).send(user[0].oauth_id)
+          res.status(200).send(user[0].id)
         }
         else {
           res.cookie('token', ACCESS_TOKEN)
