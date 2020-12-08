@@ -8,7 +8,7 @@ const cors = require("cors")
 
 require("dotenv").config()
 
-const indexRouter = require("./routes/index")
+const mainRouter = require("./routes/index")
 const boardRouter = require("./routes/board")
 const usersRouter = require("./routes/users")
 
@@ -51,7 +51,7 @@ app.use(
 )
 
 // router
-app.use("/", indexRouter)
+app.use("/", mainRouter)
 app.use("/users", usersRouter)
 app.use("/board", boardRouter)
 

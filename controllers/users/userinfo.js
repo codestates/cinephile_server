@@ -3,7 +3,7 @@ const { user } = require('../../models')
 module.exports = async (req, res) => {
   // 쿠키 확인
   console.log(req.cookies, req.session, req.sessionID)
-  let id = req.session.userid
+  let id = req.body.id
   if (req.cookies.token) {
     user.findOne({
       where: {

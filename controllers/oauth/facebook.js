@@ -18,7 +18,6 @@ module.exports = {
       headers: {
       }
     })
-
     // 토큰을 얻었다.
     const ACCESS_TOKEN = token.data.access_token
 
@@ -46,7 +45,7 @@ module.exports = {
         console.log(user[0])
         if (created) {
           res.cookie('token', ACCESS_TOKEN)
-          res.status(200).send(user[0].oauth_id)
+          res.status(200).send(user[0].id)
         }
         else {
           res.cookie('token', ACCESS_TOKEN)
