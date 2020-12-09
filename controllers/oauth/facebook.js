@@ -42,7 +42,7 @@ module.exports = {
         }
       })
       .then((user, created) => {
-        console.log(user[0])
+        // console.log(user[0])
         if (created) {
           res.cookie('token', ACCESS_TOKEN)
           res.status(200).send(user[0].id)

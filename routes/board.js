@@ -6,7 +6,7 @@ router.get("/", boardController.board) //
 router.get("/movies", boardController.movies) //
 router.get("/article/:id", boardController.article) //
 router.post("/write", boardController.write) //
-router.post("/comment/:id", boardController.comment) // 
+router.post("/comment", boardController.comment) // 
 router.post("/like", boardController.like)
 
 module.exports = router

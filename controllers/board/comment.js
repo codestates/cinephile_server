@@ -2,20 +2,19 @@ const model = require('../../models')
 
 module.exports = async (req, res) => {
   // 유저, 글(param), 댓글
-  const { user, text } = req.body
-  const { id } = req.params
-
+  const { user, text, article } = req.body
+  console.log(req.body)
   // 유저를 찾는다.
   const theUser = await model.user.findOne({
     where: {
-      id: user.id
+      id: user
     }
   })
 
   // 글을 찾는다.
   const theArticle = await model.article.findOne({
     where: {
-      id: id
+      id: article
     }
   })
 
