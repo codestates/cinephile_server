@@ -1,5 +1,5 @@
-const crypto = require('crypto')
 const { user } = require('../../models')
+const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   const { email, password } = req.body
