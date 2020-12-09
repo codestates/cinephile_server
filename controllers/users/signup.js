@@ -1,5 +1,5 @@
-const crypto = require('crypto')
 const { user } = require('../../models')
+const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   const { email, password, nickname, gender, age } = req.body
@@ -29,13 +29,13 @@ module.exports = async (req, res) => {
         }
         // 이메일이 있으면 실패
         else {
-          res.status(409).send('Already exists user')
+          res.status(409).send('이미 가입되어 있습니다.')
         }
       })
       .catch(err => { console.log(err) })
   }
   else {
     // 파라미터가 하나라도 불충분하면
-    res.status(422).send('insufficient parameters supplied')
+    res.status(422).send('모든 정보를 입력해주세요')
   }
 }

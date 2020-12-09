@@ -11,6 +11,7 @@ require("dotenv").config()
 const mainRouter = require("./routes/index")
 const boardRouter = require("./routes/board")
 const usersRouter = require("./routes/users")
+const settingRouter = require("./routes/setting")
 
 // https options
 const option =
@@ -54,6 +55,7 @@ app.use(
 app.use("/", mainRouter)
 app.use("/users", usersRouter)
 app.use("/board", boardRouter)
+app.use("/setting", settingRouter)
 
 // http, https
 option ?
