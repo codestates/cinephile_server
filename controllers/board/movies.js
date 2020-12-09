@@ -5,8 +5,9 @@ const CLIENT_ID = process.env.CLIENT_ID // CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET // CLIENT_Secret
 
 module.exports = async (req, res) => {
-  // 유저가 선택한 영화의 제목
-  const title = encodeURI(req.body.title)
+  // 유저가 선택한 영화의 제목(params)
+  // const { title } = req.params
+  // const title = encodeURI(req.body.title)
   // 또는 display, start, genre, country, yearfrom, yearto
 
   // 네이버 API, 영화를 검색한다.
