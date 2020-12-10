@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   comment.init({
     text: DataTypes.STRING,
-    likecount: DataTypes.INTEGER,
-    isliked: DataTypes.JSON
+    likecount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'comment',

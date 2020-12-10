@@ -14,9 +14,6 @@ module.exports = {
       likecount: {
         type: Sequelize.INTEGER
       },
-      isliked: {
-        type: Sequelize.JSON
-      },
       articleId: {
         type: Sequelize.INTEGER,
         references: {

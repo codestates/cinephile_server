@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         password: hashPassword
       }
     })
-    console.log(1111111111111111)
+
     await model.user.update(
       { password: newhashPassword },
       {
@@ -31,6 +31,6 @@ module.exports = async (req, res) => {
     res.status(200).send('비밀번호가 정상적으로 수정되었습니다.')
   }
   else {
-    res.status(404).send('토큰이 없습니다.')
+    res.status(404).send('로그인을 하세요.')
   }
 }

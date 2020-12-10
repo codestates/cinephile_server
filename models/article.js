@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   article.init({
     title: DataTypes.STRING,
-    text: DataTypes.STRING
+    text: DataTypes.STRING,
+    upload_url: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'article',
