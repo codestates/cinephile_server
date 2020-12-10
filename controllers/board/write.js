@@ -4,15 +4,13 @@ const cheerio = require('cheerio')
 
 module.exports = async (req, res) => {
   const { token } = req.cookies
+  console.log(req.file) // upload file
 
   // 토큰을 확인한다.
   if (token) {
     try {
       // 유저, url, 제목, 본문
-      const { user, url, title, text } = req.body
-
-      // upload file
-      console.log(req.file)
+      const { user, url, title, text, upload_url } = req.body
 
       // 유저가 선택한 영화 정보의 html을 가져온다.
       const getHtml = axios.get(url)
@@ -45,7 +43,7 @@ module.exports = async (req, res) => {
         })
 
       // 영화 데이터를 저장한다.
-      const saveMoviedata = await model.movie.create({
+      const movieData = await model.movie.create({
         title: selectedMovie['title'],
         sub_title: selectedMovie['sub_title'],
         genre: selectedMovie['summary_genre'],
@@ -64,8 +62,9 @@ module.exports = async (req, res) => {
       await model.article.create({
         title: title,
         text: text,
+        upload_url: upload_url,
         userId: user,
-        movieId: saveMoviedata.id
+        movieId: movieData.id
       })
 
       res.status(200).send('새로운 글이 작성되었습니다.')

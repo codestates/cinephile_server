@@ -2,6 +2,28 @@ const express = require("express")
 const model = require('../models')
 const router = express.Router()
 
+router.post("/", async (req, res) => {
+  const { token } = req.cookies
+  const user = req.body
+
+  if (token) {
+    try {
+      const oauthLoginuser = await model.user.findOne({
+        where: {
+          id: user
+        }
+      })
+      res.status(200).send(oauthLoginuser)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+  else {
+    res.status(404).send('로그인을 하세요.')
+  }
+})
+
 router.get("/card", async (req, res) => {
   try {
     const board = await model.article.findAll({

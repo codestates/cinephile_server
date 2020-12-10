@@ -14,6 +14,9 @@ module.exports = {
       text: {
         type: Sequelize.STRING
       },
+      upload_url: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {

@@ -41,14 +41,16 @@ module.exports = {
           nickname: nickname
         }
       })
-      .then((user, created) => {
+      .then(user => {
         // console.log(user[0])
-        if (created) {
+        if (user[1]) {
           res.cookie('token', ACCESS_TOKEN)
-          res.status(200).send(user[0].id)
+          res.cookie('oauth_id', user[0].id)
+          res.status(200).redirect('http://localhost:3001')
         }
         else {
           res.cookie('token', ACCESS_TOKEN)
+          res.cookie('user', user[0].id)
           res.status(200).redirect('http://localhost:3001')
         }
       })

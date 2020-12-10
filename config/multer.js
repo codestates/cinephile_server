@@ -3,6 +3,7 @@ const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
 
 require("dotenv").config()
+// aws.config.loadFromPath(__dirname + '/awsconfig.json');
 aws.config.update({
   accessKeyId: process.env.ACCESSKEY,
   secretAccessKey: process.env.SECRET_ACCESSKEY,
@@ -15,7 +16,7 @@ const upload = multer({
     bucket: 'finalprojectbuck',
     acl: 'public-read',
     key: function (req, file, cb) {
-      cb(null, Math.floor(Math.random() * 1000).toString() + Date.now() + '.' + file.originalname.split('.').pop());
+      cb(null, file.originalname);
     }
   })
 })
