@@ -2,13 +2,12 @@ const model = require('../../models')
 
 module.exports = async (req, res) => {
   const { token } = req.cookies
+  // 유저, 글(param), 댓글
+  const { user, text, article } = req.body
 
   // 토큰을 확인한다.
   if (token) {
     try {
-      // 유저, 글(param), 댓글
-      const { user, text, article } = req.body
-
       // 유저를 찾는다.
       const theUser = await model.user.findOne({
         where: {
