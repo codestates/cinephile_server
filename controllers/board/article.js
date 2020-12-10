@@ -10,7 +10,15 @@ module.exports = async (req, res) => {
       where: {
         id: id
       },
-      include: [{ all: true }]
+      include: [
+        { model: model.user },
+        { model: model.movie },
+        {
+          model: model.comment,
+          include: [{ model: model.user }]
+        }
+        // include: [{ all: true }]
+      ]
     })
     res.status(200).send(selectedArticle)
   }
