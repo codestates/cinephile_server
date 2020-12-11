@@ -8,17 +8,17 @@ module.exports = async (req, res) => {
     try {
       // 유저, 댓글
       const { user, comment } = req.body
-
+      console.log(user, comment)
       // 좋아요 테이블을 조회한다.
       const [data, created] = await model.like
         .findOrCreate({
           where: {
-            userId: user.id,
-            commentId: comment.id
+            userId: user,
+            commentId: comment
           },
           defaults: {
-            userId: user.id,
-            commentId: comment.id
+            userId: user,
+            commentId: comment
           }
         })
 
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       if (created) {
         await model.comment.increment('likecount', {
           where: {
-            id: comment.id
+            id: comment
           }
         })
         // 변경된 댓글 데이터
@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
         })
         await model.comment.decrement('likecount', {
           where: {
-            id: comment.id
+            id: comment
           }
         })
         // 변경된 댓글 데이터

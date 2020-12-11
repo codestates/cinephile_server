@@ -49,7 +49,6 @@ module.exports = {
       })
       .then(user => {
         if (user[1]) {
-          console.log(user)
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('oauth_id', user[0].id)
           res.status(200).redirect('http://localhost:3001')

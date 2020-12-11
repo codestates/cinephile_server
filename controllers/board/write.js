@@ -4,7 +4,6 @@ const cheerio = require('cheerio')
 
 module.exports = async (req, res) => {
   const { token } = req.cookies
-  console.log(req.file) // upload file
 
   // 토큰을 확인한다.
   if (token) {
@@ -59,15 +58,16 @@ module.exports = async (req, res) => {
       })
 
       // 글 데이터를 저장한다.
-      await model.article.create({
+      const article = await model.article.create({
         title: title,
         text: text,
-        upload_url: upload_url,
+        upload_url: upload_url ? upload_url : null,
         userId: user,
         movieId: movieData.id
       })
 
-      res.status(200).send('새로운 글이 작성되었습니다.')
+      // 새로운 글 정보를 응답한다.
+      res.status(200).send(article)
     }
     catch (err) {
       console.log(err)

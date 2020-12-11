@@ -42,7 +42,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       story2: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

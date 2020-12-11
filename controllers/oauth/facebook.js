@@ -42,7 +42,6 @@ module.exports = {
         }
       })
       .then(user => {
-        // console.log(user[0])
         if (user[1]) {
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('oauth_id', user[0].id)

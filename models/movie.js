@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.STRING,
     poster: DataTypes.STRING,
     story1: DataTypes.STRING,
-    story2: DataTypes.STRING
+    story2: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'movie',
