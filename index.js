@@ -1,8 +1,8 @@
 const express = require("express")
-const fs = require("fs")
 const https = require("https")
+const fs = require("fs")
 const morgan = require("morgan")
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const cors = require("cors")
 
@@ -44,8 +44,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      httpOnly: false,
-      // sameSite: 'none', // only secure
+      httpOnly: true,
+      // sameSite: 'none', // 모든 요청마다 쿠키 전송이 가능합니다. with secure
       // secure: true // HTTPS
     }
   })

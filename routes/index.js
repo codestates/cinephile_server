@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     }
   }
   else {
-    res.status(404).send('로그인을 하세요.')
+    res.status(404).send('유효 토큰이 아닙니다.')
   }
 })
 

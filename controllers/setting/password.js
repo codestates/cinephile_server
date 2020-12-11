@@ -3,7 +3,7 @@ const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   // 유저, 비밀번호, 새비밀번호, 토큰
-  const { user, password, newpassword } = req.body
+  const { id, password, newpassword } = req.body
   const { token } = req.cookies
 
   // 암호화
@@ -14,23 +14,16 @@ module.exports = async (req, res) => {
 
   // 토큰과 유저, 비밀번호를 확인한다.
   if (token) {
-    await model.user.findOne({
-      where: {
-        id: user,
-        password: hashPassword
-      }
-    })
-
     await model.user.update(
       { password: newhashPassword },
       {
         where: {
-          id: user
+          id: id
         }
       })
     res.status(200).send('비밀번호가 정상적으로 수정되었습니다.')
   }
   else {
-    res.status(404).send('로그인을 하세요.')
+    res.status(404).send('유효 토큰이 아닙니다.')
   }
 }
