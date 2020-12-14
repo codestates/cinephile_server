@@ -26,6 +26,12 @@ const option =
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// client
+app.use(express.static('public'))
+
+
+
+
 // middleware
 app.use(
   cors({
@@ -50,6 +56,7 @@ app.use(
     }
   })
 )
+
 
 
 // router
