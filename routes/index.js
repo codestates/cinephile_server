@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.post("/", async (req, res) => {
   const { token } = req.cookies
-  const user = req.body
+  const { user } = req.body
 
   if (token) {
     try {
