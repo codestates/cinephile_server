@@ -1,8 +1,8 @@
 const express = require("express")
-const https = require("https")
 const fs = require("fs")
+const https = require("https")
 const morgan = require("morgan")
-const cookieParser = require("cookie-parser")
+const cookieParser = require('cookie-parser')
 const session = require("express-session")
 const cors = require("cors")
 
@@ -44,12 +44,13 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      httpOnly: true,
-      // sameSite: 'none', // 모든 요청마다 쿠키 전송이 가능합니다. with secure
-      // secure: true // HTTPS
+      httpOnly: false,
+      sameSite: 'none', // only secure
+      secure: true // HTTPS
     }
   })
 )
+
 
 // router
 app.use("/", mainRouter)
@@ -62,7 +63,41 @@ option ?
   https.createServer(option, app).listen(PORT, () => {
     console.log(`HTTPS is running at port ${PORT}`)
   })
+
   :
   app.listen(PORT, () => {
     console.log(`HTTP is running at port ${PORT}`)
   })
+
+
+
+
+
+//socket io
+
+const server = require('http').Server(app);
+const io = require("socket.io")(server)
+
+
+// 소켓
+io.on('connection', function (socket) {
+  console.log('socket io connect!')
+
+  socket.on('chat message', function (name, msg) {
+    console.log('socket.id = ', socket.id)
+
+    io.emit('chat message', name, msg);
+  });
+
+  socket.on('enter chatroom', function (name) {
+    console.log('유저가 채팅에 들어옴')
+    socket.broadcast.emit('chat message', { type: "alert", chat: name + "님이 입장하였습니다.", regDate: Date.now() });
+  })
+
+  socket.on('disconnect', function (name) {
+    console.log('유저가 채팅을 나감')
+    socket.broadcast.emit('chat message', { type: "alert", chat: name + "님이 퇴장하였습니다.", regDate: Date.now() });
+
+  });
+
+});
