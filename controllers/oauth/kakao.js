@@ -46,12 +46,12 @@ module.exports = {
         if (user[1]) {
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('oauth_id', user[0].id)
-          res.status(200).redirect('https://final.cinephile.kro.kr/')
+          res.status(200).redirect('https://cinephile.tk/')
         }
         else {
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('user', user[0].id)
-          res.status(200).redirect('https://final.cinephile.kro.kr/')
+          res.status(200).redirect('https://cinephile.tk/')
         }
       })
       .catch(err => console.log(err))
