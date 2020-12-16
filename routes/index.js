@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.post("/", async (req, res) => {
   const { token } = req.cookies
-  const user = req.body
+  const { user } = req.body
 
   if (token) {
     try {
@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
           id: user
         }
       })
+      oauthLoginuser.password = ''
       res.status(200).send(oauthLoginuser)
     }
     catch (err) {

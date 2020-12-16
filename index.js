@@ -17,14 +17,17 @@ const settingRouter = require("./routes/setting")
 const option =
   process.env.NODE_ENV === "production"
     ? {
-      key: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/privkey.pem"),
-      cert: fs.readFileSync("/etc/letsencrypt/live/final.cinephile.kro.kr/fullchain.pem")
+      key: fs.readFileSync("/etc/letsencrypt/live/cinephile.tk/privkey.pem"),
+      cert: fs.readFileSync("/etc/letsencrypt/live/cinephile.tk/fullchain.pem")
     }
     : undefined
 
 // server
 const app = express()
 const PORT = process.env.PORT || 3000
+
+// client
+app.use(express.static('public'))
 
 // middleware
 app.use(
