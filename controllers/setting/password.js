@@ -3,12 +3,10 @@ const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   // 유저, 비밀번호, 새비밀번호, 토큰
-  const { id, password, newpassword } = req.body
+  const { id, newpassword } = req.body
   const { token } = req.cookies
 
   // 암호화
-  const hashPassword =
-    crypto.createHmac('sha1', 'secret').update(password).digest('hex')
   const newhashPassword =
     crypto.createHmac('sha1', 'secret').update(newpassword).digest('hex')
 
