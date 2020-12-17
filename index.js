@@ -1,8 +1,9 @@
 const express = require("express")
-const https = require("https")
 const fs = require("fs")
+const https = require("https")
+const http = require("http")
 const morgan = require("morgan")
-const cookieParser = require("cookie-parser")
+const cookieParser = require('cookie-parser')
 const session = require("express-session")
 const cors = require("cors")
 
@@ -47,9 +48,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      httpOnly: true,
-      // sameSite: 'none', // 모든 요청마다 쿠키 전송이 가능합니다. with secure
-      // secure: true // HTTPS
+      httpOnly: false,
+      sameSite: 'none', // only secure
+      secure: true // HTTPS
     }
   })
 )
@@ -60,12 +61,36 @@ app.use("/users", usersRouter)
 app.use("/board", boardRouter)
 app.use("/setting", settingRouter)
 
-// http, https
+//socket io
+const httpServer = http.createServer(app)
+
+io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3001'
+  }
+})
+
+// 소켓
+io.on('connection', function (socket) {
+  console.log('socket io connect!')
+  socket.on('send message', function (name, msg) {
+    console.log('socket.id = ', socket.id)
+    socket.removeAllListeners()
+    console.log('리스너 제거됨')
+    socket.broadcast.emit('receive message', name, msg);
+  });
+  socket.on('disconnect', function (name) {
+    console.log('유저가 채팅을 나감')
+    socket.broadcast.emit('message', "손님이 퇴장하였습니다");
+  });
+});
+
+// server on
 option ?
   https.createServer(option, app).listen(PORT, () => {
     console.log(`HTTPS is running at port ${PORT}`)
   })
   :
-  app.listen(PORT, () => {
+  httpServer.listen(PORT, () => {
     console.log(`HTTP is running at port ${PORT}`)
   })

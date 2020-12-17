@@ -9,7 +9,7 @@ module.exports = {
   link: async (req, res) => {
     // 네이버 로그인 취소
     if (req.query.error) {
-      res.status(200).redirect('http://localhost:3001')
+      res.status(200).redirect('https://cinephile.tk/')
     }
 
     // 코드를 얻었다.
@@ -51,12 +51,12 @@ module.exports = {
         if (user[1]) {
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('oauth_id', user[0].id)
-          res.status(200).redirect('http://localhost:3001')
+          res.status(200).redirect('https://cinephile.tk/')
         }
         else {
           res.cookie('token', ACCESS_TOKEN)
           res.cookie('user', user[0].id)
-          res.status(200).redirect('http://localhost:3001')
+          res.status(200).redirect('https://cinephile.tk/')
         }
       })
       .catch(err => console.log(err))
