@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
     }
   }
   else {
-    res.status(404).send('유효 토큰이 아닙니다.')
+    res.status(401).send('유효하지 않은 토큰입니다.')
   }
 })
 
@@ -33,7 +33,7 @@ router.get("/card", async (req, res) => {
     res.status(200).send(board)
   }
   catch (err) {
-    console.log(err)
+    res.status(500).send(err)
   }
 })
 
