@@ -6,7 +6,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET // CLIENT_Secret
 
 module.exports = async (req, res) => {
   // 유저가 선택한 영화의 제목(params)
-  const { title } = encodeURI(req.params)
+  const title = encodeURI(req.params.title)
   // const title = encodeURI(req.body.title)
   // 또는 display, start, genre, country, yearfrom, yearto
 
@@ -25,6 +25,6 @@ module.exports = async (req, res) => {
     res.status(200).send(list.data)
   }
   catch (err) {
-    console.log(err)
+    res.status(500).send(err)
   }
 }
