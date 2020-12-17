@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
       }
       // 로그인 실패
       else {
-        res.status(404).send('invalid user')
+        res.status(404).send('유효하지 않은 사용자입니다.')
       }
     })
 }

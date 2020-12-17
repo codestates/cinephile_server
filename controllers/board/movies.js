@@ -25,6 +25,6 @@ module.exports = async (req, res) => {
     res.status(200).send(list.data)
   }
   catch (err) {
-    console.log(err)
+    res.status(500).send(err)
   }
 }

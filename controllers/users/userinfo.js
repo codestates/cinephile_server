@@ -20,6 +20,6 @@ module.exports = async (req, res) => {
   }
   // 토큰이 없으면
   else {
-    res.status(401).send('로그인을 하세요.')
+    res.status(401).send('유효하지 않은 토큰입니다.')
   }
 }

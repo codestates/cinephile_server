@@ -3,12 +3,10 @@ const crypto = require('crypto')
 
 module.exports = async (req, res) => {
   // 유저, 비밀번호, 새비밀번호, 토큰
-  const { id, password, newpassword } = req.body
+  const { id, newpassword } = req.body
   const { token } = req.cookies
 
   // 암호화
-  const hashPassword =
-    crypto.createHmac('sha1', 'secret').update(password).digest('hex')
   const newhashPassword =
     crypto.createHmac('sha1', 'secret').update(newpassword).digest('hex')
 
@@ -24,6 +22,6 @@ module.exports = async (req, res) => {
     res.status(200).send('비밀번호가 정상적으로 수정되었습니다.')
   }
   else {
-    res.status(404).send('유효 토큰이 아닙니다.')
+    res.status(401).send('유효하지 않은 토큰입니다.')
   }
 }

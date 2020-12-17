@@ -26,6 +26,6 @@ module.exports = async (req, res) => {
     }
   }
   else {
-    res.status(404).send('유효 토큰이 아닙니다.')
+    res.status(401).send('유효 토큰이 아닙니다.')
   }
 }

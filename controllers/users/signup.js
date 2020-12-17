@@ -32,10 +32,10 @@ module.exports = async (req, res) => {
           res.status(409).send('이미 가입되어 있습니다.')
         }
       })
-      .catch(err => { console.log(err) })
+      .catch(err => { res.status(500).send(err) })
   }
   else {
     // 파라미터가 하나라도 불충분하면
-    res.status(422).send('모든 정보를 입력해주세요')
+    res.status(422).send('모든 정보를 입력해주세요.')
   }
 }
