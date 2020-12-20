@@ -1,5 +1,6 @@
 const express = require("express")
 const https = require("https")
+const http = require("http")
 const fs = require("fs")
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
@@ -60,12 +61,38 @@ app.use("/users", usersRouter)
 app.use("/board", boardRouter)
 app.use("/setting", settingRouter)
 
-// http, https
+// server
+let httpsServer
+let httpServer
 option ?
-  https.createServer(option, app).listen(PORT, () => {
+  httpsServer = https.createServer(option, app).listen(PORT, () => {
     console.log(`HTTPS is running at port ${PORT}`)
   })
   :
-  app.listen(PORT, () => {
+  httpServer = http.createServer(app).listen(PORT, () => {
     console.log(`HTTP is running at port ${PORT}`)
   })
+const server = httpsServer ? httpsServer : httpServer
+
+// socket.io
+const io = require('socket.io')(server, {
+  cors: "*",
+});
+
+io.on('connection', function (socket) {
+  console.log('socket io connect!')
+  io.emit('receive message', ' ', "유저가 입장하였습니다")
+
+  socket.on('send message', function (name, msg) {
+    console.log('socket.id = ', socket.id)
+    // socket.removeAllListeners()
+    // console.log('리스너 제거됨')
+
+    io.emit('receive message', name, msg)
+  })
+
+  socket.on('disconnect', function (name) {
+    console.log('유저가 채팅을 나감')
+    io.emit('receive message', ' ', "유저가 퇴장하였습니다")
+  })
+})
